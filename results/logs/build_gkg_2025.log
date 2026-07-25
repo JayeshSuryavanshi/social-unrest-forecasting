@@ -1,0 +1,16 @@
+streaming 111 GKG daily files for cc=IN (2025-04-01..2025-07-20) with 10 workers
+  30/111 files | 255,145 record-admin1 rows | 0 empty
+  60/111 files | 571,258 record-admin1 rows | 0 empty
+  90/111 files | 671,777 record-admin1 rows | 18 empty
+  111/111 files | 869,352 record-admin1 rows | 18 empty
+
+wrote GKG theme panel: 3,182 (date,admin1) rows, 36 admin1 units -> data/interim/gkg_IN_2025_themes.parquet
+theme totals:
+gkg_n           869352
+gkg_protest      68331
+gkg_unrest       56574
+gkg_conflict    260811
+gkg_terror      189772
+gkg_kill        256454
+gkg_arrest      199587
+gkg_crisis      573174

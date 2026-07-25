@@ -1,0 +1,6 @@
+# Python 3.12. Versions pinned to the environment the results were produced in.
+pandas==3.0.5
+numpy==2.5.1
+scikit-learn==1.9.0
+pyarrow==25.0.0
+requests==2.34.2

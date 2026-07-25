@@ -1,0 +1,39 @@
+ACLED India daily rows: 2,199 | 2025-04-01..2025-07-20 | 35 states
+weekly grid: 16 weeks x 35 states = 560 state-weeks
+merged GKG: 9 theme cols
+target = n_unrest
+
+
+########## GKG DEEP-TEXT ABLATION (do GKG theme signals add skill beyond event history?) ##########
+
+=== occurrence | t+1 wk | base rate 0.840 | 47 history + 45 GKG feats ===
+    feature set  AUPRC  AUROC  AUPRC vs history
+    persistence  0.914  0.752            -0.072
+   history only  0.986  0.926             0.000
+GKG themes only  0.957  0.837            -0.029
+  history + GKG  0.982  0.914            -0.004
+  -> MARGINAL AUPRC of GKG deep-text over history alone: -0.004
+
+=== occurrence | t+3 wk | base rate 0.848 | 47 history + 45 GKG feats ===
+    feature set  AUPRC  AUROC  AUPRC vs history
+    persistence  0.908  0.716            -0.077
+   history only  0.985  0.916             0.000
+GKG themes only  0.972  0.853            -0.012
+  history + GKG  0.986  0.921             0.001
+  -> MARGINAL AUPRC of GKG deep-text over history alone: +0.001
+
+=== escalation | t+1 wk | base rate 0.251 | 47 history + 45 GKG feats ===
+    feature set  AUPRC  AUROC  AUPRC vs history
+    persistence  0.284  0.563            -0.019
+   history only  0.303  0.563             0.000
+GKG themes only  0.254  0.517            -0.049
+  history + GKG  0.296  0.584            -0.007
+  -> MARGINAL AUPRC of GKG deep-text over history alone: -0.007
+
+=== escalation | t+3 wk | base rate 0.295 | 47 history + 45 GKG feats ===
+    feature set  AUPRC  AUROC  AUPRC vs history
+    persistence  0.317  0.541            -0.086
+   history only  0.404  0.590             0.000
+GKG themes only  0.350  0.562            -0.054
+  history + GKG  0.423  0.624             0.019
+  -> MARGINAL AUPRC of GKG deep-text over history alone: +0.019

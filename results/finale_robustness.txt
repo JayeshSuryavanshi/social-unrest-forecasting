@@ -1,0 +1,12 @@
+=== PRIMARY: escalation, n_unrest, min_train=16, block-bootstrap 90% CI ===
+  t+1: history AUPRC 0.288 | +GKG 0.266 | marginal -0.022 | 90% CI [-0.056, +0.023] | P(text helps)=0.25
+  t+3: history AUPRC 0.291 | +GKG 0.248 | marginal -0.043 | 90% CI [-0.071, -0.011] | P(text helps)=0.01
+
+=== ROBUSTNESS: escalation marginal (AUPRC of history+GKG minus history) ===
+  target       min_train  t+1      t+3
+  n_unrest        12     -0.005   -0.029
+  n_unrest        16     -0.022   -0.043
+  n_unrest        20     -0.045   -0.048
+  n_violence      12     +0.000   +0.019
+  n_violence      16     +0.011   +0.013
+  n_violence      20     +0.017   +0.001

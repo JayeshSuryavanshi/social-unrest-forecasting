@@ -1,0 +1,45 @@
+ACLED India daily rows: 48,378 | 2018-01-08..2025-07-20 | 36 states
+weekly grid: 393 weeks x 36 states = 14,148 state-weeks
+target = n_unrest
+
+
+########## ACLED | LABEL = OCCURRENCE ##########
+
+====================================================================
+  ACLED | n_unrest | occurrence | t+1 wk | 59 feats   (base rate = 0.817, n_test = 12,096)
+====================================================================
+       model  AUPRC  AUROC  Brier  AUPRC_lift_vs_persist
+ Persistence  0.925  0.816  0.110                  0.000
+ Climatology  0.985  0.943  0.066                  0.060
+      LogReg  0.988  0.952  0.090                  0.063
+RandomForest  0.988  0.951  0.078                  0.063
+
+====================================================================
+  ACLED | n_unrest | occurrence | t+3 wk | 59 feats   (base rate = 0.817, n_test = 12,024)
+====================================================================
+       model  AUPRC  AUROC  Brier  AUPRC_lift_vs_persist
+ Persistence  0.921  0.806  0.116                  0.000
+ Climatology  0.984  0.943  0.066                  0.063
+      LogReg  0.986  0.947  0.093                  0.065
+RandomForest  0.986  0.947  0.080                  0.065
+
+
+########## ACLED | LABEL = ESCALATION ##########
+
+====================================================================
+  ACLED | n_unrest | escalation | t+1 wk | 59 feats   (base rate = 0.157, n_test = 12,096)
+====================================================================
+       model  AUPRC  AUROC  Brier  AUPRC_lift_vs_persist
+ Persistence  0.182  0.559  0.234                  0.000
+ Climatology  0.182  0.589  0.129                  0.000
+      LogReg  0.207  0.617  0.234                  0.025
+RandomForest  0.239  0.648  0.168                  0.057
+
+====================================================================
+  ACLED | n_unrest | escalation | t+3 wk | 59 feats   (base rate = 0.156, n_test = 12,024)
+====================================================================
+       model  AUPRC  AUROC  Brier  AUPRC_lift_vs_persist
+ Persistence  0.161  0.516  0.255                  0.000
+ Climatology  0.181  0.588  0.129                  0.019
+      LogReg  0.223  0.643  0.232                  0.061
+RandomForest  0.244  0.664  0.167                  0.083

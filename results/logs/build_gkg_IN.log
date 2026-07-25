@@ -1,0 +1,23 @@
+streaming 303 GKG daily files for cc=IN (2025-09-01..2026-06-30) with 10 workers
+  30/303 files | 290,633 record-admin1 rows | 0 empty
+  60/303 files | 577,407 record-admin1 rows | 0 empty
+  90/303 files | 896,834 record-admin1 rows | 0 empty
+  120/303 files | 1,192,983 record-admin1 rows | 0 empty
+  150/303 files | 1,462,076 record-admin1 rows | 0 empty
+  180/303 files | 1,750,824 record-admin1 rows | 0 empty
+  210/303 files | 2,030,254 record-admin1 rows | 0 empty
+  240/303 files | 2,297,612 record-admin1 rows | 0 empty
+  270/303 files | 2,588,853 record-admin1 rows | 0 empty
+  300/303 files | 2,883,613 record-admin1 rows | 0 empty
+  303/303 files | 2,915,296 record-admin1 rows | 0 empty
+
+wrote GKG theme panel: 10,320 (date,admin1) rows, 36 admin1 units -> data/interim/gkg_IN_daily_themes.parquet
+theme totals:
+gkg_n           2915296
+gkg_protest      222843
+gkg_unrest       128883
+gkg_conflict     607040
+gkg_terror       283916
+gkg_kill         604460
+gkg_arrest       570007
+gkg_crisis      1708611

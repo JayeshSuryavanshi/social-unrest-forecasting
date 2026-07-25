@@ -1,0 +1,417 @@
+<title>Social Unrest Prediction — 2026 Feasibility Brief</title>
+<style>
+  :root{
+    --paper:#E7EBE6; --card:#F5F7F3; --card2:#EEF1EB;
+    --ink:#1B241F; --ink2:#2C3831; --muted:#5B655E; --faint:#8A938C;
+    --line:#C7CEC5; --line2:#D6DCD3;
+    --accent:#A66A16;      /* signal ochre — early warning, restrained */
+    --accent-soft:#F0E4CE;
+    --go:#3C6B4E;  --go-soft:#DCE8DE;
+    --stop:#9E3728; --stop-soft:#F0DAD4;
+    --warn:#A66A16; --warn-soft:#F0E4CE;
+    --serif:"Iowan Old Style","Charter","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:"Seravek","Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
+    --mono:"SF Mono","IBM Plex Mono","JetBrains Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.62;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:940px;margin:0 auto;padding:0 28px}
+  .measure{max-width:680px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;line-height:1.15}
+  p{margin:0 0 1em}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
+  a:hover{border-color:var(--accent)}
+  .mono{font-family:var(--mono)}
+  .tnum{font-variant-numeric:tabular-nums}
+  code{font-family:var(--mono);font-size:.86em;background:var(--card2);
+    padding:.08em .35em;border-radius:3px;border:1px solid var(--line2)}
+
+  /* ---- masthead ---- */
+  header{border-bottom:2px solid var(--ink);padding:52px 0 26px;margin-top:8px}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  h1{font-size:44px;margin:0 0 14px;letter-spacing:-.01em}
+  .dek{font-size:20px;color:var(--ink2);max-width:640px;margin:0}
+  .statusbar{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:26px}
+  .chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;
+    padding:5px 10px;border-radius:100px;border:1px solid var(--line);
+    background:var(--card);color:var(--muted);display:inline-flex;gap:7px;align-items:center}
+  .chip b{color:var(--ink);font-weight:600}
+  .dot{width:7px;height:7px;border-radius:50%;flex:none}
+  .dot.g{background:var(--go)} .dot.a{background:var(--accent)} .dot.r{background:var(--stop)}
+
+  /* ---- sections ---- */
+  section{padding:44px 0;border-bottom:1px solid var(--line2)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint);margin:0 0 10px;
+    display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent)}
+  h2{font-size:30px;margin:0 0 20px;letter-spacing:-.01em}
+  h3{font-size:19px;margin:30px 0 8px}
+  .lede{font-size:19px;color:var(--ink2)}
+
+  /* ---- verdict block ---- */
+  .verdict{background:var(--ink);color:#E7EBE6;border-radius:14px;padding:30px 32px;margin:6px 0 4px}
+  .verdict .eyebrow{color:#B9C4B4}
+  .verdict .eyebrow::before{background:var(--accent)}
+  .verdict h2{color:#fff;margin:0 0 14px}
+  .verdict p{color:#CDD5CB}
+  .verdict strong{color:#fff}
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#33403842;
+    border:1px solid #3a4740;border-radius:10px;overflow:hidden;margin-top:22px}
+  .vcell{background:#212b26;padding:18px}
+  .vcell .lab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+  .vcell.feas .lab{color:#8FBF9E}.vcell.part .lab{color:#D8A857}.vcell.hard .lab{color:#D98A78}
+  .vcell h4{font-family:var(--serif);font-size:17px;margin:0 0 6px;color:#fff;font-weight:600}
+  .vcell p{font-size:14px;margin:0;color:#B4BEB6;line-height:1.5}
+
+  /* ---- scorecard ---- */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  .task{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:20px 22px}
+  .task .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:4px}
+  .task h3{margin:0;font-size:17px}
+  .task .num{font-family:var(--mono);font-size:12px;color:var(--faint)}
+  .task p{font-size:14.5px;color:var(--muted);margin:8px 0 0;line-height:1.5}
+  .verdict-tag{font-family:var(--mono);font-size:11px;letter-spacing:.03em;font-weight:600;
+    padding:4px 9px;border-radius:5px;white-space:nowrap;margin-top:12px;display:inline-block}
+  .t-real{background:var(--go-soft);color:var(--go)}
+  .t-gen{background:var(--card2);color:var(--muted);border:1px solid var(--line)}
+  .t-part{background:var(--warn-soft);color:var(--warn)}
+  .t-fake{background:var(--stop-soft);color:var(--stop)}
+
+  /* ---- leakage flow ---- */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:22px 0 6px}
+  .fbox{flex:1;min-width:150px;background:var(--card);border:1px solid var(--line);
+    border-radius:9px;padding:14px 15px}
+  .fbox .fl{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+  .fbox p{font-size:13.5px;margin:0;color:var(--ink2);line-height:1.45}
+  .fbox.bad{border-color:var(--stop);background:var(--stop-soft)}
+  .fbox.bad .fl{color:var(--stop)}
+  .farrow{align-self:center;color:var(--faint);font-size:20px;flex:none}
+  .loop{margin-top:14px;font-size:14.5px;color:var(--stop);background:var(--stop-soft);
+    border-left:3px solid var(--stop);padding:12px 16px;border-radius:0 8px 8px 0}
+
+  /* ---- tables ---- */
+  .tscroll{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line2);vertical-align:top}
+  thead th{background:var(--card2);font-family:var(--mono);font-size:11px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--muted);font-weight:600;position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:none}
+  td b{color:var(--ink)} td .s{color:var(--muted);font-size:13px}
+  .num-cell{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* ---- callout / pull ---- */
+  .pull{font-family:var(--serif);font-size:23px;line-height:1.35;color:var(--ink);
+    border-left:3px solid var(--accent);padding:4px 0 4px 22px;margin:26px 0}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:18px 0}
+  .note .eyebrow{margin-bottom:8px}
+
+  /* ---- plan / steps ---- */
+  .plan{display:grid;gap:12px;margin-top:8px}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:18px;background:var(--card);
+    border:1px solid var(--line);border-radius:11px;padding:18px 22px}
+  .step .ph{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600;
+    padding-top:3px;letter-spacing:.04em;white-space:nowrap}
+  .step h3{margin:0 0 5px;font-size:17px}
+  .step p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.5}
+  .step .out{font-family:var(--mono);font-size:12.5px;color:var(--ink2);margin-top:9px;display:block}
+  .step .out b{color:var(--go)}
+
+  ul.tight{margin:6px 0 0;padding-left:20px}
+  ul.tight li{margin-bottom:6px;font-size:15px}
+  ul.tight li::marker{color:var(--accent)}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  footer{padding:36px 0 60px;color:var(--muted);font-size:13px}
+  footer .eyebrow{margin-bottom:14px}
+  footer ol{margin:0;padding-left:20px;line-height:1.7}
+  footer a{color:var(--muted)}
+
+  @media (max-width:720px){
+    h1{font-size:33px}.dek{font-size:18px}h2{font-size:25px}
+    .vgrid,.cards,.two{grid-template-columns:1fr}
+    .step{grid-template-columns:1fr;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    section,header>*{animation:rise .5s cubic-bezier(.2,.6,.2,1) both}
+    @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">Feasibility Brief · Revisited July 2026</p>
+    <h1>Can we actually predict social unrest?</h1>
+    <p class="dek">Reviving a 2022 masters project on ACLED conflict data — an honest audit of what was real, what the field can actually do, and the version worth building now.</p>
+    <div class="statusbar">
+      <span class="chip"><span class="dot g"></span>ACLED&nbsp;<b>live · updated through Jun 2026</b></span>
+      <span class="chip"><span class="dot g"></span>GDELT&nbsp;<b>pulled today, no key</b></span>
+      <span class="chip"><span class="dot r"></span>Bing News API&nbsp;<b>retired Aug 2025</b></span>
+      <span class="chip"><span class="dot a"></span>Original "85% prediction"&nbsp;<b>label leakage</b></span>
+    </div>
+  </header>
+
+  <section>
+    <div class="verdict">
+      <p class="eyebrow">The bottom line</p>
+      <h2>Yes — but not the thing the original project claimed to do.</h2>
+      <p>The idea is sound and the data is real. But <strong>"predicting unrest" splits into three very different problems</strong>, and they are not equally solvable. The original project's headline result measured none of them — it recovered a label it had built from the same text it was predicting from. Reframed as a genuine out-of-time forecast, this is a legitimate, feasible, portfolio-grade project. The catch: much of the achievable "accuracy" is just conflict's stubborn persistence, and beating that baseline is the whole game.</p>
+      <div class="vgrid">
+        <div class="vcell feas">
+          <p class="lab">◆ Feasible</p>
+          <h4>The risk map</h4>
+          <p>Which regions are dangerous over the next 1–24 months. Done operationally today. Modest-to-good skill.</p>
+        </div>
+        <div class="vcell part">
+          <p class="lab">◆ Feasible, mostly baseline</p>
+          <h4>Continuation</h4>
+          <p>Will active violence persist / roughly how intense. Predictable — but a naive "same as last month" already nails most of it.</p>
+        </div>
+        <div class="vcell hard">
+          <p class="lab">◆ Largely unsolved</p>
+          <h4>Onset &amp; change</h4>
+          <p>New unrest in a calm place, exact escalation timing. The valuable question. State-of-the-art barely beats "no change."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">What was actually built in 2022</p>
+    <h2>An honest scorecard</h2>
+    <p class="lede measure">Four components shipped. Only one was even framed as forecasting — and it's the one that doesn't hold up.</p>
+    <div class="cards">
+      <div class="task">
+        <div class="top"><h3>Event-type classification</h3><span class="num">Task 1</span></div>
+        <p>TF-IDF → classical models sort an ACLED <code>NOTES</code> field into 6 event types. ~0.59 accuracy on a 100-row sample.</p>
+        <span class="verdict-tag t-real">✓ REAL — but classifies an event already described, not predicted</span>
+      </div>
+      <div class="task">
+        <div class="top"><h3>Event summarization</h3><span class="num">Task 2</span></div>
+        <p>T5-base turns structured fields into ACLED-style prose. ROUGE-1 F1 ~0.375, one epoch, model never saved.</p>
+        <span class="verdict-tag t-gen">◦ GENERATION — an NLG demo, no predictive content</span>
+      </div>
+      <div class="task">
+        <div class="top"><h3>LSTM over daily sequences</h3><span class="num">Task 3 · M2</span></div>
+        <p>GloVe + Keras LSTM over day-vectors for one location. The only genuine forecasting <em>framing</em> — but the run errored and produced no metrics.</p>
+        <span class="verdict-tag t-part">◑ RIGHT IDEA — unproven, needs a temporal backtest</span>
+      </div>
+      <div class="task">
+        <div class="top"><h3>News → ACLED prediction</h3><span class="num">Task 3 · M3</span></div>
+        <p>The headline: SGD/LogReg hit <b>0.85</b> accuracy predicting whether a news article maps to unrest. Marketed as early warning.</p>
+        <span class="verdict-tag t-fake">✕ NOT PREDICTION — circular label leakage</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Why the 0.85 isn't what it looks like</p>
+    <h2>The number is a mirror, not a forecast</h2>
+    <p class="measure">Confirmed by reading the original notebooks directly — the classifiers print <code>accuracy 0.8504672897196262</code>. Here is the exact loop that produced it:</p>
+    <div class="flow">
+      <div class="fbox"><p class="fl">1 · Input</p><p>A news article's own words &amp; keywords (via newspaper3k).</p></div>
+      <div class="farrow">→</div>
+      <div class="fbox bad"><p class="fl">2 · Label built from…</p><p>the <em>same</em> text: <code>label = 1</code> if its TF-IDF cosine similarity to any ACLED note ≥ 0.30.</p></div>
+      <div class="farrow">→</div>
+      <div class="fbox"><p class="fl">3 · Model learns</p><p>to recover that label from the same words. Random 90/10 split, no future held out.</p></div>
+    </div>
+    <div class="loop"><b>The circularity:</b> the target is a deterministic function of the input's own vocabulary. The model just rediscovers that "articles about protests contain protest words." 0.85 measures internal consistency of a keyword rule — not whether news anticipates events. The "~5-day warning lead time" is the same artifact: the code only keeps article–event pairs where the article predates the event, so a positive gap is guaranteed by construction.</p></div>
+    <p class="pull">A real forecast predicts an outcome that exists in the world independent of the document. Here, the future is never referenced — so you can't be right or wrong about it.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Is the field itself able to do this?</p>
+    <h2>What the state of the art actually achieves</h2>
+    <p class="lede measure">Serious operational systems exist. Their honest numbers set realistic expectations — and reveal the one baseline that dominates everything.</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>System</th><th>What it forecasts</th><th>Granularity · horizon</th><th>Honest skill</th></tr></thead>
+        <tbody>
+          <tr><td><b>ViEWS</b><br><span class="s">Uppsala + PRIO</span></td><td>Prob. &amp; expected fatalities of organized violence</td><td class="num-cell">grid / country-month · 1–36 mo</td><td>High AUROC on <em>where</em>; AUPR far lower. In its own competition, <b>no model beat "no-change"</b> on predicting <em>change</em>.</td></tr>
+          <tr><td><b>ACLED CAST</b><br><span class="s">ACLED's own</span></td><td>Count of violent events (3 of the 6 types)</td><td class="num-cell">admin-1 · 6× 4-week</td><td>Good on stable conflicts; explicitly warns it's poor on "new, highly volatile" ones.</td></tr>
+          <tr><td><b>conflictforecast.org</b><br><span class="s">Mueller &amp; Rauh</span></td><td>Onset risk from newspaper-topic NLP — the M3 idea done right</td><td class="num-cell">country / grid · 1–2 yr</td><td>Leakage-controlled onset <b>AUC 0.73–0.82</b> from text. Above chance, far from certainty.</td></tr>
+          <tr><td><b>EMBERS</b><br><span class="s">IARPA OSI</span></td><td>Specific protest events from social/news signals</td><td class="num-cell">city · ~7–10 day lead</td><td>Hit targets: precision 0.87 / recall 0.79 — but only for <em>announced</em> protests in well-covered regions.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <p class="eyebrow">The persistence trap — internalize this</p>
+      <p style="margin:0">Political violence is extraordinarily sticky in space and time: violent last month → almost certainly violent next month; calm stays calm. So a "no-change" baseline is a brutally high bar. In the ViEWS escalation-prediction competition across 15+ teams, <b>no model beat no-change</b> on the test set under its own metric. <strong>Implication:</strong> any honest result is reported as <em>skill over persistence</em> — a few points of AUPRC — never as a raw accuracy headline. And new-onset in calm areas (base rate often &lt;1–3%) is dramatically harder than continuation, by near-consensus in the literature.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The version worth building</p>
+    <h2>A genuine, feasible reformulation</h2>
+    <p class="lede measure">Forecast a <em>future ACLED outcome</em> from <em>strictly past information</em> — a real out-of-time task with a checkable answer. ACLED is ground truth; news is only a feature, never the label.</p>
+
+    <div class="two">
+      <div>
+        <h3>The task</h3>
+        <p style="font-size:15px;color:var(--muted)">For each state (ACLED <code>admin1</code>) and week, predict the probability of an <b>unrest event</b> (protest or violence) there <b>next period</b>. India's 37 states are the testbed — heterogeneous enough (calm vs hot) that history features carry signal. Freeze the label definition before modeling.</p>
+        <h3>Non-negotiable protocol</h3>
+        <ul class="tight">
+          <li><b>Out-of-time only.</b> Train on the past, test on a strictly-future block. Rolling-origin backtest, like ViEWS — never a random split.</li>
+          <li><b>Beat the baselines</b> or report that you didn't: persistence, per-unit climatology, and a conflict-history GBDT with no text.</li>
+          <li><b>Right metrics:</b> AUPRC (with base rate), Brier + calibration, lead-time decay (t+1 vs t+3), all as skill-over-persistence. Accuracy is meaningless here.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Phased scope — laptop-scale</h3>
+        <div class="plan">
+          <div class="step"><span class="ph">P0</span><div><h3>Panel + honesty scaffold</h3><p>Pull one region's ACLED history. Build the admin1×month panel, fatal-event labels, base rates. Backtest harness + baselines <em>first</em>.</p><span class="out">out → <b>what persistence scores out-of-time</b></span></div></div>
+          <div class="step"><span class="ph">P1</span><div><h3>Minimum viable forecast</h3><p>Lagged event-history features → LogReg + LightGBM, class-weighted &amp; calibrated. AUPRC / Brier / reliability, skill vs persistence.</p><span class="out">out → <b>an honest next-month forecaster</b></span></div></div>
+          <div class="step"><span class="ph">P2</span><div><h3>Spatial lift</h3><p>Admin1 adjacency + neighbor features, static covariates, a 2nd region for transfer. <span style="color:var(--faint)">optional</span></p><span class="out">out → the spatial-graph gain, quantified</span></div></div>
+          <div class="step"><span class="ph">P3</span><div><h3>The NLP / LLM lane</h3><p>Add a GDELT / ACLED-notes / LLM text-signal stream. Measure <em>marginal</em> AUPRC lift over the history model.</p><span class="out">out → <b>does news add early-warning value?</b></span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="pull" style="margin-top:30px">The honest, interesting question — and a genuine contribution: does open-source news text add forecasting skill <em>beyond</em> conflict history, and at what lead time? A credible "not much, once history is controlled" is a real result. A recycled 0.85 is not.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Proof — the honest version, actually run</p>
+    <h2>What honest skill looks like on real data</h2>
+    <div class="note" style="border-color:var(--go);background:var(--go-soft)">
+      <p class="eyebrow" style="color:var(--go)">Strongest result — ACLED human-curated ground truth (India, 2018–2025)</p>
+      <p style="margin:0 0 12px">Machine-coded news is noisy. Run on <b>ACLED</b> — human-curated, higher-fidelity (though still ~77% newspaper-sourced) — across ~12,000 out-of-time test state-weeks, the forecaster is markedly stronger, especially on the hard escalation task:</p>
+      <div class="tscroll">
+        <table>
+          <thead><tr><th>Label · horizon</th><th class="num-cell">persistence AUPRC</th><th class="num-cell">RandomForest AUPRC</th><th class="num-cell">AUROC</th><th>lift</th></tr></thead>
+          <tbody>
+            <tr><td>Occurrence · t+1</td><td class="num-cell">0.925</td><td class="num-cell">0.988</td><td class="num-cell">0.82→0.95</td><td style="color:var(--go)">+0.063</td></tr>
+            <tr><td><b>Escalation</b> · t+1</td><td class="num-cell">0.182</td><td class="num-cell"><b>0.239</b></td><td class="num-cell">0.56→0.65</td><td style="color:var(--go)"><b>+0.057</b></td></tr>
+            <tr><td><b>Escalation</b> · t+3</td><td class="num-cell">0.161</td><td class="num-cell"><b>0.244</b></td><td class="num-cell">0.52→0.66</td><td style="color:var(--go)"><b>+0.083</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin:12px 0 0;font-size:14.5px;color:var(--ink2)">Vs. the same task on noisy GDELT (escalation lift only +0.03, AUROC ~0.58). <b>Clean ground truth is more learnable than any model tweak</b> — the clearest "yes, we can predict something" in the study.</p>
+    </div>
+    <h3 style="margin-top:30px">The GDELT method-validation (real-time, 18 months)</h3>
+    <p class="lede measure">Before ACLED, I proved the pipeline on 18 months of GDELT for India (37 states, 3.1M events) — leakage-free panel, rolling-origin backtest, unrest per state per week.</p>
+    <p class="measure" style="font-size:15px;color:var(--muted)">Two labels, two questions. <b>Occurrence</b> = "any unrest next week" (base rate 0.82, so AUROC is the lens). <b>Escalation</b> = "unrest spikes above the state's own recent norm" (base rate 0.14 — the hard, valuable question, so AUPRC is the lens). GDELT is a noisy news proxy, not ACLED — this validates the <em>method</em>, not a deployable model.</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Label · horizon</th><th>Model</th><th class="num-cell">AUPRC</th><th class="num-cell">AUROC</th><th>vs. persistence</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2"><b>Occurrence</b> · t+1<br><span class="s">base rate 0.82</span></td><td>Persistence baseline</td><td class="num-cell">0.927</td><td class="num-cell">0.812</td><td class="s">—</td></tr>
+          <tr><td><b>Random Forest</b> (history)</td><td class="num-cell">0.991</td><td class="num-cell"><b>0.958</b></td><td style="color:var(--go)">clearly beats it (AUROC 0.81→0.96)</td></tr>
+          <tr><td rowspan="2"><b>Escalation</b> · t+1<br><span class="s">base rate 0.14</span></td><td>Persistence baseline</td><td class="num-cell">0.163</td><td class="num-cell">0.550</td><td class="s">—</td></tr>
+          <tr><td><b>Random Forest</b> (history)</td><td class="num-cell">0.188</td><td class="num-cell">0.585</td><td style="color:var(--go)">beats it, +0.026 AUPRC</td></tr>
+          <tr><td rowspan="2"><b>Escalation</b> · t+3<br><span class="s">base rate 0.14</span></td><td>Persistence baseline</td><td class="num-cell">0.143</td><td class="num-cell">0.506</td><td class="s">—</td></tr>
+          <tr><td><b>Random Forest</b> (history)</td><td class="num-cell">0.173</td><td class="num-cell">0.586</td><td style="color:var(--go)">beats it, +0.030 AUPRC</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure" style="font-size:14.5px;color:var(--muted)"><b>Contrast — Nigeria</b> (same harness, first testbed): base rate 0.96, so "any violence" is near-trivial and on <em>escalation</em> the model does <b>not</b> beat persistence at t+1 (−0.008) — a clean reproduction of ViEWS's "no model beats no-change." India differs because its cross-state heterogeneity (calm south/west vs hot J&K, Chhattisgarh, Manipur) gives the history features something to grip.</p>
+    <p class="pull">On India the model beats "no-change" out-of-time on the hard escalation task — small (~3 points of AUPRC) but real, at both horizons. That is what a credible forecast looks like, and it is worth far more than a recycled 0.85.</p>
+
+    <h3 style="margin-top:34px">The headline experiment: does news <em>text</em> add anything?</h3>
+    <p class="measure">This is your 2022 question, asked honestly. I split the features into <b>event history</b> vs <b>news text</b> (coverage tone + article volume) and measured the marginal value of adding text on top of history — same rolling-origin backtest.</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Label · horizon</th><th class="num-cell">history only</th><th class="num-cell">history + text</th><th>marginal of text</th></tr></thead>
+        <tbody>
+          <tr><td>Occurrence · t+1</td><td class="num-cell">0.991</td><td class="num-cell">0.991</td><td style="color:var(--muted)">−0.000</td></tr>
+          <tr><td>Occurrence · t+3</td><td class="num-cell">0.991</td><td class="num-cell">0.991</td><td style="color:var(--muted)">−0.000</td></tr>
+          <tr><td>Escalation · t+1</td><td class="num-cell">0.184</td><td class="num-cell">0.188</td><td style="color:var(--warn)">+0.005</td></tr>
+          <tr><td>Escalation · t+3</td><td class="num-cell">0.172</td><td class="num-cell">0.173</td><td style="color:var(--warn)">+0.001</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="pull" style="border-color:var(--stop)">News text adds essentially <em>nothing</em> once conflict history is controlled — and text alone is worse than history alone. The exact inverse of the recycled 0.85, and a genuine, publishable negative result.</p>
+    <p class="measure" style="font-size:14.5px;color:var(--muted)"><b>Why this is the *right* answer, not a disappointment:</b> it matches the literature exactly — Mueller &amp; Rauh show newspaper text helps mainly for <em>onset in low-history regions</em>, and every Indian state has rich event history, so a shallow news signal has nothing to add.</p>
+
+    <h3 style="margin-top:34px">The follow-up: does text help where history is <em>sparse</em>?</h3>
+    <p class="measure">India is high-history everywhere. The literature says text should help most where history is <em>absent</em>. So I pulled six normally-calmer countries and re-ran the ablation across the base-rate spectrum — from Ecuador (14% of province-weeks see unrest) up to saturated Kenya (96%).</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Country</th><th class="num-cell">occ. base rate</th><th class="num-cell">history only</th><th class="num-cell">text only</th><th>text on top</th></tr></thead>
+        <tbody>
+          <tr><td><b>Ecuador</b> <span class="s">low-history</span></td><td class="num-cell">0.14</td><td class="num-cell">0.653</td><td class="num-cell" style="color:var(--go)"><b>0.661</b> ↑</td><td style="color:var(--warn)">+0.009</td></tr>
+          <tr><td>Georgia</td><td class="num-cell">0.30</td><td class="num-cell">0.857</td><td class="num-cell">0.838</td><td class="s">−0.015</td></tr>
+          <tr><td>Sri Lanka</td><td class="num-cell">0.72</td><td class="num-cell">0.911</td><td class="num-cell">0.886</td><td class="s">+0.001</td></tr>
+          <tr><td>India</td><td class="num-cell">0.82</td><td class="num-cell">0.991</td><td class="num-cell">0.990</td><td class="s">−0.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="pull">The hypothesis is only <em>faintly</em> supported: text-only overtakes history-only in exactly one place — the lowest-history country — but the marginal value of text <em>on top of</em> history is ≈0 everywhere (−0.03 to +0.01). Shallow news signal and event history are largely redundant.</p>
+    <p class="measure" style="font-size:14.5px;color:var(--muted)"><b>The honest, narrow claim:</b> a <em>shallow</em> news signal (coverage tone + article volume) adds no marginal value beyond event history, even where history is sparse — though it does start to stand in for history at the extreme low end. Whether <em>deep</em> text clears that bar was the next experiment — below.</p>
+
+    <h3 style="margin-top:34px">Deep text: GKG themes — the faithful version</h3>
+    <p class="measure">The real test uses GDELT's <b>GKG thematic tags</b> (PROTEST, UNREST, political-violence, terror… parsed from full article text) — the open analog to the news-topic models Mueller &amp; Rauh used. GKG is too sparse at province level for small countries, so I ran it on India (2.9M article-mentions, 45 theme features, dense).</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Label · horizon</th><th class="num-cell">history only</th><th class="num-cell">GKG themes only</th><th>marginal of deep text</th></tr></thead>
+        <tbody>
+          <tr><td>Occurrence · t+1</td><td class="num-cell">0.990</td><td class="num-cell">0.991</td><td class="s">+0.001</td></tr>
+          <tr><td>Escalation · t+1</td><td class="num-cell">0.173</td><td class="num-cell">0.173</td><td class="s">−0.002</td></tr>
+          <tr><td>Escalation · t+3</td><td class="num-cell">0.177</td><td class="num-cell" style="color:var(--go)"><b>0.196</b> ↑</td><td class="s">+0.004</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure" style="font-size:15px;color:var(--muted)">Deep text is a clear step up from shallow: GKG-only now <em>matches</em> history on occurrence and even <em>beats</em> it on escalation at t+3 (0.196 vs 0.177). Richer text carries as much signal as the coded event stream. <b>But it still adds ≈0 on top of history</b> (−0.002 to +0.004).</p>
+    <p class="pull" style="border-color:var(--accent)">Why every text experiment nets to zero marginal: in a GDELT-only pipeline the "event history" is <em>itself</em> news-derived — GDELT events are coded from the same articles GKG themes tag. History and text are two views of one source, so text can't add orthogonal signal.</p>
+    <p class="measure" style="font-size:14.5px;color:var(--muted)"><b>Toward closing the loop.</b> Mueller &amp; Rauh got a positive text result because their <em>history</em> came from a curated dataset that is genuinely empty in low-history countries, leaving room for text. The faithful test needs a <em>non-news</em> history source. <b>ACLED</b> is a step toward that — human-curated, higher-fidelity — but (per the review below) still ~77% newspaper-sourced, so it's curated news, not fully independent ground truth.</p>
+
+    <h3 style="margin-top:34px">The finale: news text vs ACLED history</h3>
+    <p class="measure">The last experiment, on a 40-week ACLED-overlapping window (~24 test weeks), with a bootstrap CI. GKG themes merged into the ACLED panel — history now comes from a source that is <em>not</em> news-derived.</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>Label · horizon</th><th class="num-cell">history</th><th class="num-cell">GKG text only</th><th class="num-cell">history + GKG</th><th class="num-cell">marginal</th><th>90% CI</th></tr></thead>
+        <tbody>
+          <tr><td>Occurrence · t+1</td><td class="num-cell">0.991</td><td class="num-cell" style="color:var(--stop)">0.983 ↓</td><td class="num-cell">0.991</td><td class="num-cell">−0.000</td><td class="s">—</td></tr>
+          <tr><td>Escalation · t+1</td><td class="num-cell">0.288</td><td class="num-cell" style="color:var(--stop)">0.221 ↓</td><td class="num-cell">0.266</td><td class="num-cell">−0.022</td><td class="s">[−0.056, +0.023]</td></tr>
+          <tr><td>Escalation · t+3</td><td class="num-cell">0.291</td><td class="num-cell" style="color:var(--stop)">0.204 ↓</td><td class="num-cell">0.248</td><td class="num-cell" style="color:var(--stop)"><b>−0.043</b></td><td style="color:var(--stop)"><b>[−0.071, −0.011]</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="pull" style="border-color:var(--go)">What survives: no history+text model beats the <em>best</em> history-only forecaster (RandomForest ~0.29). Text does not improve the best available model.</p>
+    <div class="note" style="border-color:var(--accent)">
+      <p class="eyebrow" style="color:var(--accent)">A 4-agent adversarial review re-ran this and forced 3 corrections — I verified each</p>
+      <ul class="tight" style="margin-top:4px">
+        <li><b>"Text significantly degrades the forecast" was wrong</b> — an unregularized-RF artifact (92 features, ~136 positives). Under L2/L1 logistic regression the t+3 marginal <b>flips positive</b> (+0.024 to +0.029). Text carries a <em>little</em> signal; it just can't beat the best history model.</li>
+        <li><b>"ACLED is independent of news" was false</b> — ~77% of ACLED India events are newspaper-sourced. It's human-<em>curated</em> news, not non-news ground truth, so the "circularity confirmed" framing is overstated. A clean test needs truly non-news (administrative) history — never run.</li>
+        <li><b>Coverage:</b> 33 of 36 states (Telangana, Ladakh, Sikkim dropped for missing FIPS codes) — scope the claim to that subset.</li>
+      </ul>
+    </div>
+    <p class="measure" style="font-size:14.5px;color:var(--muted)"><b>The corrected verdict across every text experiment</b> — shallow and deep, 8 countries 0.14→0.96 base rate, GDELT + ACLED history: <b>news text does not improve on the best history-only forecaster of unrest.</b> It is at most weakly informative and redundant with the event record for the best model. Whether text helps over a <em>truly</em> non-news structural baseline is the real open question — untested here.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Getting the data in 2026</p>
+    <h2>Access, changed since your course</h2>
+    <div class="two">
+      <div>
+        <h3 style="color:var(--go)">GDELT — works right now, no key</h3>
+        <p style="font-size:15px;color:var(--muted)">The free, redistributable replacement for the retired Bing News API. Verified live today: one 15-min slice returned 162 unrest events (protests in Delhi; fighting concentrated in Iran, UK, US). Raw 15-minute CSVs, plain public URLs, no registration. Safe to commit (with citation).</p>
+      </div>
+      <div>
+        <h3 style="color:var(--accent)">ACLED — free, but re-plumbed</h3>
+        <p style="font-size:15px;color:var(--muted)">Still current (weekly releases, through mid-2026; it weathered the 2025 US funding cuts via UN CRAF'd funding). But the old <code>email+key</code> scheme is dead — now OAuth2 bearer tokens via a myACLED account. Raw-event API access wants an <b>institutional email</b>; a personal Gmail lands the most limited tier. <b>Never commit ACLED data</b> — their terms forbid redistribution.</p>
+      </div>
+    </div>
+    <div class="note">
+      <p style="margin:0;font-size:14.5px"><b>Already scaffolded</b> at <code>~/Documents/Projects/social-unrest-revival-2026</code> — a clean uv workspace (your original repo untouched): <code>fetch_gdelt.py</code> (verified), <code>fetch_acled.py</code> (2026 OAuth, needs your key), and a <code>.gitignore</code> that keeps raw data out.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="padding:0">
+      <p class="eyebrow">Selected sources · verified</p>
+      <ol>
+        <li>Vesco, Hegre, Colaresi et al. (2022), <i>United they stand: Findings from an escalation prediction competition</i>, International Interactions 48(4).</li>
+        <li>Mueller &amp; Rauh (2018), <i>Reading Between the Lines: Prediction of Political Violence Using Newspaper Text</i>, APSR 112(2); and (2022) <i>The Hard Problem of Prediction for Conflict Prevention</i>, JEEA.</li>
+        <li>Hegre et al. (2021), <i>ViEWS2020</i>, Journal of Peace Research; ACLED CAST methodology (acleddata.com).</li>
+        <li>Ramakrishnan et al. (2014), <i>Beating the news with EMBERS</i>, KDD.</li>
+        <li>ACLED Access Guide &amp; API docs (2026); GDELT Project data terms (gdeltproject.org).</li>
+      </ol>
+      <p style="margin-top:20px;color:var(--faint)">Prepared as a revival audit of <span class="mono">Social-Unrest-Prediction-NLP</span> (UB, 2022). Findings adversarially cross-checked against original repo code and primary literature.</p>
+    </div>
+  </footer>
+</div>

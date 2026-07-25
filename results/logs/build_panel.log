@@ -1,0 +1,14 @@
+streaming 546 GDELT daily files for country=NI (2025-01-01..2026-06-30) with 8 workers
+  60/546 files | 196,690 rows kept | 0 missing/empty
+  120/546 files | 398,366 rows kept | 0 missing/empty
+  180/546 files | 538,457 rows kept | 18 missing/empty
+  240/546 files | 774,297 rows kept | 18 missing/empty
+  300/546 files | 970,995 rows kept | 18 missing/empty
+  360/546 files | 1,183,839 rows kept | 18 missing/empty
+  420/546 files | 1,376,217 rows kept | 18 missing/empty
+  480/546 files | 1,563,865 rows kept | 18 missing/empty
+  540/546 files | 1,772,686 rows kept | 18 missing/empty
+  546/546 files | 1,794,733 rows kept | 18 missing/empty
+deduped 1,794,733 -> 1,794,733 unique events
+
+wrote daily panel: 21,617 (date,admin1) rows, 39 admin1 units -> data/interim/gdelt_NI_daily_panel.parquet

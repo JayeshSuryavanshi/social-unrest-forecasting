@@ -1,0 +1,39 @@
+loaded daily panel: 21,368 rows -> 9,261 in window [2025-09-08..2026-06-22], 37 admin1 units
+weekly grid: 42 weeks x 36 units = 1,512 unit-weeks
+merged GKG deep-text panel: 9 theme columns
+target = n_unrest
+
+
+########## GKG DEEP-TEXT ABLATION (do GKG theme signals add skill beyond event history?) ##########
+
+=== occurrence | t+1 wk | base rate 0.821 | 47 history + 45 GKG feats ===
+    feature set  AUPRC  AUROC  AUPRC vs history
+    persistence  0.925  0.811            -0.065
+   history only  0.990  0.954             0.000
+GKG themes only  0.991  0.957             0.001
+  history + GKG  0.991  0.958             0.001
+  -> MARGINAL AUPRC of GKG deep-text over history alone: +0.001
+
+=== occurrence | t+3 wk | base rate 0.823 | 47 history + 45 GKG feats ===
+    feature set  AUPRC  AUROC  AUPRC vs history
+    persistence  0.917  0.787            -0.074
+   history only  0.991  0.959             0.000
+GKG themes only  0.992  0.960             0.000
+  history + GKG  0.991  0.960             0.000
+  -> MARGINAL AUPRC of GKG deep-text over history alone: +0.000
+
+=== escalation | t+1 wk | base rate 0.148 | 47 history + 45 GKG feats ===
+    feature set  AUPRC  AUROC  AUPRC vs history
+    persistence  0.160  0.534            -0.013
+   history only  0.173  0.573             0.000
+GKG themes only  0.173  0.547             0.000
+  history + GKG  0.171  0.560            -0.002
+  -> MARGINAL AUPRC of GKG deep-text over history alone: -0.002
+
+=== escalation | t+3 wk | base rate 0.156 | 47 history + 45 GKG feats ===
+    feature set  AUPRC  AUROC  AUPRC vs history
+    persistence  0.164  0.524            -0.012
+   history only  0.177  0.567             0.000
+GKG themes only  0.196  0.569             0.019
+  history + GKG  0.181  0.564             0.004
+  -> MARGINAL AUPRC of GKG deep-text over history alone: +0.004

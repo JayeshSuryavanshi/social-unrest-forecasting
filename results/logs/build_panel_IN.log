@@ -1,0 +1,14 @@
+streaming 546 GDELT daily files for country=IN (2025-01-01..2026-06-30) with 8 workers
+  60/546 files | 350,170 rows kept | 0 missing/empty
+  120/546 files | 746,226 rows kept | 0 missing/empty
+  180/546 files | 1,047,778 rows kept | 18 missing/empty
+  240/546 files | 1,419,224 rows kept | 18 missing/empty
+  300/546 files | 1,770,553 rows kept | 18 missing/empty
+  360/546 files | 2,123,826 rows kept | 18 missing/empty
+  420/546 files | 2,455,557 rows kept | 18 missing/empty
+  480/546 files | 2,741,820 rows kept | 18 missing/empty
+  540/546 files | 3,065,280 rows kept | 18 missing/empty
+  546/546 files | 3,097,121 rows kept | 18 missing/empty
+deduped 3,097,121 -> 3,097,121 unique events
+
+wrote daily panel: 21,368 (date,admin1) rows, 37 admin1 units -> data/interim/gdelt_IN_daily_panel.parquet

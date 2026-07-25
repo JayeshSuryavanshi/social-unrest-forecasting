@@ -1,0 +1,38 @@
+loaded daily panel: 1,502 rows -> 1,409 in window [2025-01-06..2026-06-22], 23 admin1 units
+weekly grid: 77 weeks x 23 units = 1,771 unit-weeks
+target = n_unrest
+
+
+########## TEXT-SIGNAL ABLATION (does news tone + article volume add skill beyond event history?) ##########
+
+=== occurrence | t+1 wk | base rate 0.145 | 47 history + 12 text feats ===
+   feature set  AUPRC  AUROC  AUPRC vs history
+   persistence  0.385  0.747            -0.268
+  history only  0.653  0.820             0.000
+     text only  0.661  0.828             0.008
+history + text  0.662  0.831             0.009
+  -> MARGINAL AUPRC of news text over history alone: +0.009
+
+=== occurrence | t+3 wk | base rate 0.144 | 47 history + 12 text feats ===
+   feature set  AUPRC  AUROC  AUPRC vs history
+   persistence  0.381  0.744            -0.263
+  history only  0.645  0.837             0.000
+     text only  0.615  0.816            -0.030
+history + text  0.646  0.833             0.001
+  -> MARGINAL AUPRC of news text over history alone: +0.001
+
+=== escalation | t+1 wk | base rate 0.046 | 47 history + 12 text feats ===
+   feature set  AUPRC  AUROC  AUPRC vs history
+   persistence  0.065  0.562            -0.078
+  history only  0.143  0.717             0.000
+     text only  0.165  0.716             0.022
+history + text  0.142  0.737            -0.000
+  -> MARGINAL AUPRC of news text over history alone: -0.000
+
+=== escalation | t+3 wk | base rate 0.046 | 47 history + 12 text feats ===
+   feature set  AUPRC  AUROC  AUPRC vs history
+   persistence  0.059  0.547            -0.112
+  history only  0.171  0.750             0.000
+     text only  0.108  0.644            -0.063
+history + text  0.161  0.753            -0.010
+  -> MARGINAL AUPRC of news text over history alone: -0.010

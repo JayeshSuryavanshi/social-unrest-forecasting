@@ -1,0 +1,22 @@
+streaming 546 GDELT daily files for countries=['BG', 'CE', 'EC', 'GG', 'KE', 'RB'] (2025-01-01..2026-06-30) with 8 workers
+  60/546 files | 118,146 rows kept | 0 missing/empty
+  120/546 files | 240,494 rows kept | 0 missing/empty
+  180/546 files | 320,485 rows kept | 18 missing/empty
+  240/546 files | 438,415 rows kept | 18 missing/empty
+  300/546 files | 545,289 rows kept | 18 missing/empty
+  360/546 files | 662,126 rows kept | 18 missing/empty
+  420/546 files | 768,995 rows kept | 18 missing/empty
+  480/546 files | 853,809 rows kept | 18 missing/empty
+  540/546 files | 937,241 rows kept | 18 missing/empty
+  546/546 files | 946,072 rows kept | 18 missing/empty
+deduped 946,072 -> 946,072 unique events
+
+wrote daily panel: 16,857 (date,admin1) rows, 57 admin1 units -> data/interim/gdelt_lowhistory_daily_panel.parquet
+
+per-country: admin1 units | total events | protest | violence
+  BG:   8 units |  293,807 |  6,262 | 23,973
+  CE:  10 units |   97,451 |  1,157 |  6,028
+  EC:  23 units |   13,295 |    204 |  1,627
+  GG:   6 units |   13,503 |    620 |    681
+  KE:   9 units |  258,457 |  3,245 | 16,906
+  RB:   1 units |   14,532 |    637 |  1,124

@@ -1,0 +1,16 @@
+# Source & derived data — ACLED terms forbid redistribution; never commit these.
+# (ignore the CONTENTS of data/raw so the provenance README can still be re-included)
+data/raw/*
+!data/raw/README.md
+data/interim/
+
+# Env
+.venv/
+.env
+*.token
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.ruff_cache/
