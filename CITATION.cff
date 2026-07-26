@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use SUB-Forecast or this code, please cite it as below."
+title: "SUB-Forecast: a leakage-controlled benchmark for subnational unrest forecasting"
+version: 1.0.0
+date-released: 2026-07-26
+authors:
+  - family-names: Suryavanshi
+    given-names: Jayesh
+repository-code: "https://github.com/JayeshSuryavanshi/social-unrest-forecasting"
+license-url: "https://github.com/JayeshSuryavanshi/social-unrest-forecasting/blob/main/LICENSE"
+keywords:
+  - conflict forecasting
+  - social unrest
+  - benchmark
+  - UCDP
+  - GDELT
+  - computational social science
+abstract: >-
+  A frozen, leakage-controlled benchmark for subnational unrest forecasting:
+  994 admin1 units across 55 countries on redistributable UCDP ground truth,
+  a news-signal panel built from 336M GDELT events, three targets (occurrence,
+  escalation, hard-problem onset), a signal-family ablation ladder, dual
+  model-family evaluation, and block-bootstrap confidence intervals computed
+  from released per-row predictions.
+references:
+  - type: data
+    title: "UCDP Georeferenced Event Dataset (GED) Global version 25.1"
+    authors:
+      - name: "Uppsala Conflict Data Program"
+  - type: data
+    title: "The GDELT Project"
+    authors:
+      - name: "The GDELT Project"
