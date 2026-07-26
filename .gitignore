@@ -37,3 +37,6 @@ __pycache__/
 
 # Paper draft stays local until ICWSM double-blind review resolves
 paper/
+
+# macOS
+.DS_Store
