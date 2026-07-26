@@ -61,6 +61,37 @@ The one soft cell (σ=2 × L2) is the rarest label (base 0.024) under the weaker
 never agree on a nonzero sign; calm-36 L2 alone shows +0.0022 [+0.000, +0.006] while RF is −0.0006 —
 consistent with scattered 90%-level noise across 6 cells and with the earlier L2 P=0.92 hint).
 
+### ⭐ Modern-representation arm, Phase 1 (2026-07-26): headline EMBEDDINGS
+The "your text was shallow" objection, attacked with real editorial language: 2.1M article URLs
+streamed per unit-month (top-12 by coverage, `build_gdelt_urls.py`), slugs parsed → **1.37M unique
+human-written headlines**, embedded locally (MiniLM, MPS), narts-weighted mean pool per unit-month,
+PCA→32 dims **fitted on pre-2017 months only** (strictly-past representation discipline). Keystone
+protocol, 5 families, CIs from saved preds (`run_embedding_ablation.py`, `preds_emb_*.parquet`).
+
+| Comparison (escalation) | RF | L2 |
+|---|---|---|
+| embeddings-only vs news-counts-only (standalone) | **0.105 vs 0.085** ✓ better | **0.099 vs 0.085** ✓ better |
+| embeddings over history | +0.0003 [−0.007,+0.008] ∅ | +0.0021 [−0.001,+0.005] ∅ |
+| embeddings beyond history+news-counts | −0.0073 [−0.013,−0.002] (RF dilution) | +0.0006 [−0.002,+0.003] ∅ |
+
+Onset: null in all embedding cells (RF −0.0017 ∅; L2 +0.0004 ∅; "all" L2 +0.0036 P=0.92 ns — the
+familiar hint, still ns).
+
+**Phase-1 verdict — subsumption survives its strongest challenger, with a mechanistic refinement:**
+1. Neural embeddings are the clearly better *standalone* text representation (+0.015–0.020 over
+   machine-coded counts) — the representation ladder points the right way.
+2. Yet over event history they add **nothing** (both families null), and beyond history+news-counts
+   they add nothing (L2) or actively dilute trees (RF; the known RF-dilution pattern → dual-family
+   rule: no claim).
+3. **The compositional insight:** the keystone's small significant escalation marginal came from
+   GDELT's *count-like* news signals, not semantics. What complements event history is the
+   quantitative event-flow content of news; the *semantic* content is what history subsumes.
+   "Informative but subsumed" is really a claim about news semantics.
+
+(Analysis note: the runner's printed "emb_over_hist+news" contrast used a zero-filled placeholder
+family; the true contrast above was recomputed from saved keystone `history+richtext` predictions —
+same protocol, test sets verified identical via matching history AUPRCs.)
+
 ## ⭐⭐⭐⭐ ACLED ground truth (India, 2018–2025) — the real deal
 Human-*curated* (higher fidelity than machine-coded GDELT; note ~77% still newspaper-sourced, so it is
 curated news, not non-news ground truth). 272k events → India only, admin1 (state) × week,

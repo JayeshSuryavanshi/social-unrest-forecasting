@@ -1,0 +1,35 @@
+grid: 141 months x 994 units | 7 news cols + 33 emb cols
+
+### escalation: 135,184 rows, 4,666 positives
+  escalation RF history        AUPRC 0.1751
+  escalation RF gkg            AUPRC 0.1048
+  escalation RF history+gkg    AUPRC 0.1753
+  escalation RF history+text   AUPRC 0.1740
+  escalation RF all            AUPRC 0.1742
+  -> emb_over_history [RF]: +0.0003 90% CI [-0.0069, +0.0079] P(+)=0.53
+  -> emb_over_hist+news [RF]: +0.0002 90% CI [-0.0066, +0.0078] P(+)=0.52
+  escalation L2 history        AUPRC 0.1475
+  escalation L2 gkg            AUPRC 0.0992
+  escalation L2 history+gkg    AUPRC 0.1496
+  escalation L2 history+text   AUPRC 0.1475
+  escalation L2 all            AUPRC 0.1511
+  -> emb_over_history [L2]: +0.0021 90% CI [-0.0007, +0.0047] P(+)=0.89
+  -> emb_over_hist+news [L2]: +0.0035 90% CI [+0.0001, +0.0071] P(+)=0.95
+
+### onset: 50,159 rows, 868 positives
+  onset      RF history        AUPRC 0.0248
+  onset      RF gkg            AUPRC 0.0195
+  onset      RF history+gkg    AUPRC 0.0231
+  onset      RF history+text   AUPRC 0.0232
+  onset      RF all            AUPRC 0.0232
+  -> emb_over_history [RF]: -0.0017 90% CI [-0.0081, +0.0037] P(+)=0.31
+  -> emb_over_hist+news [RF]: +0.0001 90% CI [-0.0064, +0.0051] P(+)=0.50
+  onset      L2 history        AUPRC 0.0213
+  onset      L2 gkg            AUPRC 0.0206
+  onset      L2 history+gkg    AUPRC 0.0217
+  onset      L2 history+text   AUPRC 0.0213
+  onset      L2 all            AUPRC 0.0250
+  -> emb_over_history [L2]: +0.0004 90% CI [-0.0017, +0.0029] P(+)=0.64
+  -> emb_over_hist+news [L2]: +0.0036 90% CI [-0.0004, +0.0084] P(+)=0.92
+
+saved -> results/embedding_ablation.csv
