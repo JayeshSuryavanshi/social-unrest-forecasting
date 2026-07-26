@@ -1,0 +1,7 @@
+95% CI sensitivity for the keystone escalation text marginals (history+richtext vs history).
+Protocol identical to scripts/keystone_ci.py (block bootstrap by test month, 1000 reps, seed 0)
+but reporting the 2.5/97.5 percentiles alongside 5/95. Produced by scripts/keystone_ci_95.py
+from the shipped per-row predictions (results/preds_ucdp_escalation_*.parquet), 2026-07-25.
+
+escalation | RF | n=87472 | marginal +0.0064 | 90% CI [+0.0019, +0.0110] | 95% CI [+0.0010, +0.0121] | 988/1000 replicates positive
+escalation | L2 | n=87472 | marginal +0.0029 | 90% CI [+0.0012, +0.0047] | 95% CI [+0.0009, +0.0050] | 997/1000 replicates positive
