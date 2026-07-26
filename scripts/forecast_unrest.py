@@ -81,6 +81,9 @@ def build_features(
     label_kind: str = "occurrence",
     target: str = "n_unrest",
     calm_periods: int = 26,
+    escal_window: int = 8,
+    escal_sigma: float = 1.0,
+    escal_floor: float = 2.0,
 ) -> tuple[pd.DataFrame, list[str]]:
     df = wk.copy()
     tgt = target if target in df.columns else "n_violence"
@@ -88,11 +91,14 @@ def build_features(
 
     # ESCALATION indicator (leakage-free): this week's target count spikes above
     # the unit's own recent norm -- threshold uses only PAST weeks (shift(1)).
+    # Benchmark v1.0 freezes (window=8, sigma=1, floor=2); the parameters exist
+    # for label-sensitivity analyses only.
     ge = df.groupby("adm1", group_keys=False)[tgt]
-    tmean = ge.apply(lambda s: s.shift(1).rolling(8, min_periods=3).mean())
-    tstd = ge.apply(lambda s: s.shift(1).rolling(8, min_periods=3).std())
+    tmean = ge.apply(lambda s: s.shift(1).rolling(escal_window, min_periods=3).mean())
+    tstd = ge.apply(lambda s: s.shift(1).rolling(escal_window, min_periods=3).std())
     df["escal"] = (
-        (df[tgt] > (tmean + tstd.fillna(0))) & (df[tgt] >= tmean + 2)
+        (df[tgt] > (tmean + escal_sigma * tstd.fillna(0)))
+        & (df[tgt] >= tmean + escal_floor)
     ).astype(int)
 
     # the "event" series this run predicts (occurrence vs escalation vs onset)

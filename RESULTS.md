@@ -44,6 +44,23 @@ signal (beat non-news baselines; substitute partially for history), complement e
 slightly (+0.3–0.6 AUPRC pts on escalation, detectable only at ~90k-obs scale), and offer no rescue at
 the onset frontier, where forecasting fails for every signal family tested.**
 
+### Label-sensitivity robustness (2026-07-26; `label_sensitivity.{py,csv,log}`)
+Both headline claims are **label-robust** (identical keystone protocol, 500-rep block-bootstrap CIs):
+
+| Escalation variant | RF marginal [90% CI] | L2 marginal [90% CI] |
+|---|---|---|
+| frozen (8-mo, 1σ, +2) | +0.0064 [+0.002, +0.011] ✓ | +0.0029 [+0.001, +0.005] ✓ |
+| window = 12 | **+0.0112 [+0.006, +0.016] ✓** | +0.0030 [+0.001, +0.005] ✓ |
+| σ = 2 | +0.0057 [+0.002, +0.009] ✓ | +0.0012 [−0.000, +0.002] ⚠ grazes 0 |
+| floor = +3 | +0.0062 [+0.001, +0.012] ✓ | +0.0034 [+0.001, +0.006] ✓ |
+
+→ **Positive in 8/8 point estimates, CI excludes zero in 7/8**; strongest under the 12-month window.
+The one soft cell (σ=2 × L2) is the rarest label (base 0.024) under the weaker model — reported, not hidden.
+
+**Onset** across calm ∈ {12, 24, 36} months: null under the dual-family rule in every window (RF and L2
+never agree on a nonzero sign; calm-36 L2 alone shows +0.0022 [+0.000, +0.006] while RF is −0.0006 —
+consistent with scattered 90%-level noise across 6 cells and with the earlier L2 P=0.92 hint).
+
 ## ⭐⭐⭐⭐ ACLED ground truth (India, 2018–2025) — the real deal
 Human-*curated* (higher fidelity than machine-coded GDELT; note ~77% still newspaper-sourced, so it is
 curated news, not non-news ground truth). 272k events → India only, admin1 (state) × week,
