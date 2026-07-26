@@ -1,0 +1,30 @@
+panel: 395 weeks x 36 states | 16 topic cols merged
+
+--- escalation t+1 | RF | base 0.157 n=12,168 ---
+  persistence      AUPRC 0.182
+  history          AUPRC 0.231
+  topics only      AUPRC 0.213  (vs history -0.019)
+  history+topics   AUPRC 0.232  MARGINAL +0.001
+
+--- escalation t+1 | L2 | base 0.157 n=12,168 ---
+  persistence      AUPRC 0.182
+  history          AUPRC 0.203
+  topics only      AUPRC 0.197  (vs history -0.006)
+  history+topics   AUPRC 0.206  MARGINAL +0.004
+
+--- escalation t+3 | RF | base 0.156 n=12,096 ---
+  persistence      AUPRC 0.161
+  history          AUPRC 0.233
+  topics only      AUPRC 0.225  (vs history -0.008)
+  history+topics   AUPRC 0.231  MARGINAL -0.002
+
+--- escalation t+3 | L2 | base 0.156 n=12,096 ---
+  persistence      AUPRC 0.161
+  history          AUPRC 0.218
+  topics only      AUPRC 0.202  (vs history -0.017)
+  history+topics   AUPRC 0.220  MARGINAL +0.001
+
+ONSET risk set: 685 calm state-weeks, 7 onsets (base rate 0.0102)
+  -> too few onset positives in India (states rarely calm 26+ wks); onset needs the multi-country UCDP panel
+
+saved -> results/richtext_ablation_IN.csv

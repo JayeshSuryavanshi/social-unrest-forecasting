@@ -10,19 +10,28 @@ current conflict data (ACLED + GDELT/GKG).
 
 ---
 
+## ⚡ SUB-Forecast v1.0 — the benchmark
+This repo now ships a frozen, leakage-controlled **subnational unrest forecasting benchmark**:
+994 admin1 units × 55 countries × 15 years on redistributable UCDP ground truth, a news-signal
+panel built from **336M GDELT events**, three targets (occurrence / escalation / hard-problem
+onset), a signal-family ablation ladder, and saved reference predictions with bootstrap-CI
+tooling. **Spec: [`BENCHMARK.md`](BENCHMARK.md).**
+
 ## TL;DR — what we found
 
 **1. Can we predict social unrest? Yes — modestly, and it's real.**
-Framed as an out-of-time escalation forecast (per state × week, "does unrest spike above the state's
-recent norm next period"), a gradient/forest model **beats the naive persistence baseline** on the hard
-task. Strongest on clean **ACLED** ground truth (India, 2018–2025, ~12,000 out-of-time test
-state-weeks): **AUROC 0.65–0.66, +0.06–0.08 AUPRC over persistence.** Data quality mattered more than
-model choice (ACLED clearly beat noisy GDELT on the identical task).
+Occurrence is well forecastable at multi-country scale (AUPRC 0.80 vs persistence 0.53);
+escalation moderately (0.18 vs 0.11); and clean human-curated ground truth beats machine-coded
+news data on identical tasks. But **onset in long-calm regions stays near-unforecastable for
+every signal family tested** (best model 1.35× a 1.8% base rate; persistence is fully blind).
 
-**2. Does news *text* add forecasting value? No — it doesn't beat the event record.**
-Tested exhaustively: shallow text (tone + volume), deep **GKG themes**, 8 countries (base rates
-0.14→0.96), and against both GDELT and ACLED history. Across all of it, **news text does not improve on
-the best history-only forecaster.** It carries at most weak signal, redundant with the event record.
+**2. Does news *text* add forecasting value? A little — far less than naive evaluations imply.**
+Across shallow tone/volume, deep GKG themes, and narrative topic models, in 55+ countries, under
+two model families: text is **informative but nearly subsumed** by the event record. Its genuine
+complement is **+0.3–0.6 AUPRC points on escalation** (block-bootstrap 90% CIs clear of zero in
+BOTH model families) — an order of magnitude smaller than leaky pipelines suggest, and detectable
+only at ~90,000-observation scale. Single-country studies lack the power to see it, text-only
+models collapse at scale, and text provides no rescue in the onset regime.
 
 **3. The original 2022 "85% prediction" was label leakage** — confirmed in the original notebooks. The
 model was trained to recover a label built from the same text it was predicting from.

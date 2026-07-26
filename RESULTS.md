@@ -13,6 +13,37 @@ outcome defined from events, never from the text/features.** Target `n_unrest` =
 > oversubscription pathology on this machine (~5 s/fit → 15+ min runs); RF fits in ~0.3 s and the
 > qualitative story is unchanged._
 
+## ⭐⭐⭐⭐⭐⭐ KEYSTONE — text vs history across regimes, MULTI-COUNTRY at scale (2026-07-25)
+The campaign's decisive experiment. 336M GDELT events (2013–2024) joined to 1,682 UCDP units by
+nearest-centroid haversine (200 km cap, no crosswalks) → machine-coded news signals (tone, volume,
+protest/conflict counts) per unit-month, merged onto the 55-country UCDP panel. 18 rolling-origin
+backtests (3 regimes × RF/L2 × {history, text-only, history+text}), tests 2017→2024, block-bootstrap
+CIs (1000 reps, by test month) from saved predictions (`results/preds_ucdp_*.parquet`,
+`keystone_ucdp.csv` — note: first run's CSV `model` column was clobbered by a scorer-key collision,
+fixed in code; rows are ordered rf then l2 per kind, and the preds parquets are the authoritative record).
+
+| Regime | base | n test | history (RF) | text marginal (RF) | 90% CI | text marginal (L2) | 90% CI |
+|---|--:|--:|--:|--:|---|--:|---|
+| occurrence | 0.200 | 87,472 | 0.801 | +0.0020 | [+0.001, +0.003] ✓ | −0.0001 | [−0.001, +0.000] ∅ |
+| **escalation** | 0.037 | 87,472 | 0.175 | **+0.0064** | **[+0.002, +0.011] ✓ P=0.99** | **+0.0029** | **[+0.001, +0.005] ✓ P=1.00** |
+| onset (calm≥24mo) | 0.018 | 27,565 | 0.025 | −0.0002 | [−0.006, +0.004] ∅ | +0.0029 | [−0.001, +0.009] P=0.92 ∅ |
+
+**Findings:**
+1. **First statistically significant positive text marginal in the project — escalation, BOTH model
+   families** (+0.3–0.6 AUPRC points, ~2–4% relative). Small, real, robust.
+2. **Consistent with the India nulls, not contradicting them**: India's CIs were ±0.03 wide — a true
+   +0.005 effect was below its detection floor. The 87k-observation panel had the power to resolve it.
+   Text's real complement is an order of magnitude smaller than naive evaluations imply.
+3. **Onset stays unforecastable for everyone**: best model 0.025 vs base 0.018 (1.35×); text adds
+   nothing significant even in the regime the literature reserves for it (L2 hint P=0.92, ns).
+4. **Text-only collapses at scale** (occurrence 0.40–0.46 vs history 0.78–0.80; escalation 0.085 vs
+   0.175): the India near-parity of text-only was a hot-region/small-sample exception, not a rule.
+
+**Unified thesis (final): news-derived signals are informative but nearly subsumed — they carry real
+signal (beat non-news baselines; substitute partially for history), complement event history only
+slightly (+0.3–0.6 AUPRC pts on escalation, detectable only at ~90k-obs scale), and offer no rescue at
+the onset frontier, where forecasting fails for every signal family tested.**
+
 ## ⭐⭐⭐⭐ ACLED ground truth (India, 2018–2025) — the real deal
 Human-*curated* (higher fidelity than machine-coded GDELT; note ~77% still newspaper-sourced, so it is
 curated news, not non-news ground truth). 272k events → India only, admin1 (state) × week,

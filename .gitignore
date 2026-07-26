@@ -1,8 +1,28 @@
-# Source & derived data — ACLED terms forbid redistribution; never commit these.
-# (ignore the CONTENTS of data/raw so the provenance README can still be re-included)
+# ---- Data policy ----
+# ACLED-derived data must NEVER be committed (ACLED ToU forbids redistribution).
+# UCDP-, GDELT-, and Open-Meteo-derived files ARE redistributable (with citation)
+# and specific benchmark files are whitelisted below.
+
 data/raw/*
 !data/raw/README.md
-data/interim/
+# (UCDP raw is redistributable but 44MB; regenerate via scripts/build_ucdp_panel.py docstring)
+
+data/interim/*
+!data/interim/ucdp_adm1_month.parquet
+!data/interim/gdelt_ucdp_month.parquet
+!data/interim/gdelt_IN_daily_panel.parquet
+!data/interim/gdelt_NI_daily_panel.parquet
+!data/interim/gdelt_lowhistory_daily_panel.parquet
+!data/interim/gkg_IN_daily_themes.parquet
+!data/interim/gkg_IN_long_named.parquet
+!data/interim/climate_IN_weekly.parquet
+!data/interim/gkg_fips_to_acled.json
+# NOT whitelisted (ACLED-derived): acled_notes_topics_IN.parquet — regenerate
+# from your own ACLED export via scripts/build_notes_topics.py
+
+# caches
+data/interim/_gdelt_ucdp_cache/
+data/interim/_climate_cache/
 
 # Env
 .venv/
@@ -14,3 +34,6 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .ruff_cache/
+
+# Paper draft stays local until ICWSM double-blind review resolves
+paper/

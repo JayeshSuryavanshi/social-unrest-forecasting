@@ -1,0 +1,118 @@
+merged news panel: 7 txt_ signal cols
+grid: 141 months x 994 adm1 units (55 countries) = 140,154 unit-months
+
+########## ONSET t+1 mo | rows 50,159 | positives 868 ##########
+
+=== UCDP onset t+1 | RF | history | base rate 0.0184 | n=27,565 (507 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.018  0.500  0.018
+climatology  0.021  0.510  0.022
+      model  0.025  0.559  0.100
+
+=== UCDP onset t+1 | RF | richtext | base rate 0.0184 | n=27,565 (507 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.018  0.500  0.018
+climatology  0.021  0.510  0.022
+      model  0.020  0.529  0.035
+
+=== UCDP onset t+1 | RF | history+richtext | base rate 0.0184 | n=27,565 (507 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.018  0.500  0.018
+climatology  0.021  0.510  0.022
+      model  0.025  0.579  0.027
+
+=== UCDP onset t+1 | L2 | history | base rate 0.0184 | n=27,565 (507 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.018  0.500  0.018
+climatology  0.021  0.510  0.022
+      model  0.021  0.535  0.257
+
+=== UCDP onset t+1 | L2 | richtext | base rate 0.0184 | n=27,565 (507 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.018  0.500  0.018
+climatology  0.021  0.510  0.022
+      model  0.023  0.546  0.242
+
+=== UCDP onset t+1 | L2 | history+richtext | base rate 0.0184 | n=27,565 (507 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.018  0.500  0.018
+climatology  0.021  0.510  0.022
+      model  0.024  0.549  0.248
+
+########## ESCALATION t+1 mo | rows 135,184 | positives 4,666 ##########
+
+=== UCDP escalation t+1 | RF | history | base rate 0.0373 | n=87,472 (3265 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.107  0.627  0.053
+climatology  0.128  0.807  0.034
+      model  0.175  0.840  0.069
+
+=== UCDP escalation t+1 | RF | richtext | base rate 0.0373 | n=87,472 (3265 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.107  0.627  0.053
+climatology  0.128  0.807  0.034
+      model  0.085  0.683  0.053
+
+=== UCDP escalation t+1 | RF | history+richtext | base rate 0.0373 | n=87,472 (3265 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.107  0.627  0.053
+climatology  0.128  0.807  0.034
+      model  0.181  0.850  0.054
+
+=== UCDP escalation t+1 | L2 | history | base rate 0.0373 | n=87,472 (3265 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.107  0.627  0.053
+climatology  0.128  0.807  0.034
+      model  0.148  0.817  0.195
+
+=== UCDP escalation t+1 | L2 | richtext | base rate 0.0373 | n=87,472 (3265 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.107  0.627  0.053
+climatology  0.128  0.807  0.034
+      model  0.085  0.684  0.211
+
+=== UCDP escalation t+1 | L2 | history+richtext | base rate 0.0373 | n=87,472 (3265 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.107  0.627  0.053
+climatology  0.128  0.807  0.034
+      model  0.150  0.821  0.188
+
+########## OCCURRENCE t+1 mo | rows 135,184 | positives 25,439 ##########
+
+=== UCDP occurrence t+1 | RF | history | base rate 0.1995 | n=87,472 (17451 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.531  0.802  0.126
+climatology  0.665  0.867  0.107
+      model  0.801  0.913  0.101
+
+=== UCDP occurrence t+1 | RF | richtext | base rate 0.1995 | n=87,472 (17451 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.531  0.802  0.126
+climatology  0.665  0.867  0.107
+      model  0.459  0.721  0.155
+
+=== UCDP occurrence t+1 | RF | history+richtext | base rate 0.1995 | n=87,472 (17451 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.531  0.802  0.126
+climatology  0.665  0.867  0.107
+      model  0.803  0.914  0.095
+
+=== UCDP occurrence t+1 | L2 | history | base rate 0.1995 | n=87,472 (17451 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.531  0.802  0.126
+climatology  0.665  0.867  0.107
+      model  0.775  0.901  0.126
+
+=== UCDP occurrence t+1 | L2 | richtext | base rate 0.1995 | n=87,472 (17451 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.531  0.802  0.126
+climatology  0.665  0.867  0.107
+      model  0.403  0.697  0.207
+
+=== UCDP occurrence t+1 | L2 | history+richtext | base rate 0.1995 | n=87,472 (17451 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.531  0.802  0.126
+climatology  0.665  0.867  0.107
+      model  0.775  0.901  0.124
+
+saved -> results/keystone_ucdp.csv

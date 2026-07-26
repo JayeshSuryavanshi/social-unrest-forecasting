@@ -1,0 +1,55 @@
+panel: 395 weeks x 36 states | 16 topic cols + 3 structural cols
+
+=== escalation t+1 | RF | base 0.157 n=12,168 ===
+  persistence            0.182
+  history                0.231
+  richtext               0.213
+  structural             0.170
+  history+richtext       0.232
+  history+structural     0.230
+  structural+richtext    0.214
+  all                    0.232
+  -> text over news-history:      +0.001
+  -> structural over history:     -0.001
+  -> TEXT over NON-NEWS baseline: +0.044
+
+=== escalation t+1 | L2 | base 0.157 n=12,168 ===
+  persistence            0.182
+  history                0.203
+  richtext               0.197
+  structural             0.153
+  history+richtext       0.206
+  history+structural     0.195
+  structural+richtext    0.195
+  all                    0.203
+  -> text over news-history:      +0.004
+  -> structural over history:     -0.007
+  -> TEXT over NON-NEWS baseline: +0.043
+
+=== escalation t+3 | RF | base 0.156 n=12,096 ===
+  persistence            0.161
+  history                0.233
+  richtext               0.225
+  structural             0.161
+  history+richtext       0.231
+  history+structural     0.227
+  structural+richtext    0.226
+  all                    0.230
+  -> text over news-history:      -0.002
+  -> structural over history:     -0.007
+  -> TEXT over NON-NEWS baseline: +0.065
+
+=== escalation t+3 | L2 | base 0.156 n=12,096 ===
+  persistence            0.161
+  history                0.218
+  richtext               0.202
+  structural             0.156
+  history+richtext       0.220
+  history+structural     0.213
+  structural+richtext    0.200
+  all                    0.216
+  -> text over news-history:      +0.001
+  -> structural over history:     -0.005
+  -> TEXT over NON-NEWS baseline: +0.043
+
+saved -> results/full_ladder_IN.csv

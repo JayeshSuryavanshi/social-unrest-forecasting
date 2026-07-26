@@ -80,6 +80,7 @@ def build_features(
     horizon: int,
     label_kind: str = "occurrence",
     target: str = "n_unrest",
+    calm_periods: int = 26,
 ) -> tuple[pd.DataFrame, list[str]]:
     df = wk.copy()
     tgt = target if target in df.columns else "n_violence"
@@ -94,8 +95,18 @@ def build_features(
         (df[tgt] > (tmean + tstd.fillna(0))) & (df[tgt] >= tmean + 2)
     ).astype(int)
 
-    # the "event" series this run predicts (occurrence vs escalation)
+    # the "event" series this run predicts (occurrence vs escalation vs onset)
     df["evt"] = df["escal"] if label_kind == "escalation" else df["viol"]
+
+    # ONSET (hard-problem) risk set: units with ZERO target events in the last
+    # `calm_periods` periods (inclusive of t). Predicting eruption among the calm
+    # -- the regime where persistence is blind and text is claimed to help.
+    if label_kind == "onset":
+        gc = df.groupby("adm1", group_keys=False)["viol"]
+        recent = gc.apply(
+            lambda s: s.rolling(calm_periods, min_periods=calm_periods).sum()
+        )
+        df["_risk"] = (recent == 0).astype(int)
 
     # national "rest-of-country" activity that week (crude spatial diffusion signal)
     nat = df.groupby("week")[tgt].transform("sum")
@@ -156,8 +167,10 @@ def build_features(
     df["woy_cos"] = np.cos(2 * np.pi * woy / 52.0)
     feats += ["woy_sin", "woy_cos"]
 
-    # DEEP-TEXT: lagged GKG theme features, if a GKG panel was merged into wk.
-    gkg_base = [c for c in df.columns if c.startswith("gkg_")]
+    # AUXILIARY SIGNAL FAMILIES, lagged identically if merged into wk:
+    #   gkg_* = GKG deep-text themes; txt_* = rich-text narrative topics;
+    #   str_* = non-news STRUCTURAL covariates (climate anomalies, elections...)
+    gkg_base = [c for c in df.columns if c.startswith(("gkg_", "txt_", "str_"))]
     for col in gkg_base:
         for lag in (1, 2, 3, 4):
             nm = f"{col}_lag{lag}"
@@ -182,21 +195,32 @@ def build_features(
 
     df = df.dropna(subset=feats + ["y"]).reset_index(drop=True)
     df["y"] = df["y"].astype(int)
+    if label_kind == "onset":  # evaluate only among currently-calm units
+        df = df[df["_risk"] == 1].reset_index(drop=True)
 
     # feature families for ablations:
-    #  text  = shallow news signals (coverage sentiment + article volume)
-    #  gkg   = deep-text GKG theme features
-    #  history = structural event-history counts (everything else)
+    #  text     = shallow news signals (coverage sentiment + article volume)
+    #  gkg      = deep-text GKG theme features
+    #  richtext = topic-model features over event narratives (txt_*)
+    #  history  = structural event-history counts (everything else)
     text_feats = [f for f in feats if f.startswith(("mean_tone", "sum_articles"))]
     gkg_feats = [f for f in feats if f.startswith("gkg_")]
-    hist_feats = [f for f in feats if f not in text_feats and f not in gkg_feats]
+    rich_feats = [f for f in feats if f.startswith("txt_")]
+    struct_feats = [f for f in feats if f.startswith("str_")]
+    aux = set(text_feats) | set(gkg_feats) | set(rich_feats) | set(struct_feats)
+    hist_feats = [f for f in feats if f not in aux]
     fams = {
         "history": hist_feats,
         "text": text_feats,
         "gkg": gkg_feats,
+        "richtext": rich_feats,
+        "structural": struct_feats,
         "all": feats,
         "history+text": hist_feats + text_feats,
         "history+gkg": hist_feats + gkg_feats,
+        "history+richtext": hist_feats + rich_feats,
+        "history+structural": hist_feats + struct_feats,
+        "structural+richtext": struct_feats + rich_feats,
     }
     return df, feats, fams
 

@@ -1,0 +1,45 @@
+grid: 180 months x 994 adm1 units (55 countries) = 178,920 unit-months
+
+########## OCCURRENCE t+1 mo | rows 173,950 | positives 30,754 ##########
+
+=== UCDP occurrence t+1 | RF | history-only | base rate 0.1910 | n=126,238 (24111 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.527  0.804  0.121
+climatology  0.652  0.866  0.104
+      model  0.800  0.916  0.100
+
+=== UCDP occurrence t+1 | L2 | history-only | base rate 0.1910 | n=126,238 (24111 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.527  0.804  0.121
+climatology  0.652  0.866  0.104
+      model  0.775  0.901  0.127
+
+########## ESCALATION t+1 mo | rows 173,950 | positives 5,799 ##########
+
+=== UCDP escalation t+1 | RF | history-only | base rate 0.0351 | n=126,238 (4428 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.099  0.622  0.051
+climatology  0.125  0.807  0.032
+      model  0.170  0.845  0.069
+
+=== UCDP escalation t+1 | L2 | history-only | base rate 0.0351 | n=126,238 (4428 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.099  0.622  0.051
+climatology  0.125  0.807  0.032
+      model  0.144  0.806  0.202
+
+########## ONSET t+1 mo | rows 70,901 | positives 1,123 ##########
+
+=== UCDP onset t+1 | RF | history-only | base rate 0.0177 | n=45,442 (803 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.018  0.500  0.018
+climatology  0.019  0.504  0.021
+      model  0.032  0.572  0.099
+
+=== UCDP onset t+1 | L2 | history-only | base rate 0.0177 | n=45,442 (803 positives) ===
+     scorer  AUPRC  AUROC  Brier
+persistence  0.018  0.500  0.018
+climatology  0.019  0.504  0.021
+      model  0.020  0.523  0.271
+
+saved -> results/ucdp_multicountry.csv

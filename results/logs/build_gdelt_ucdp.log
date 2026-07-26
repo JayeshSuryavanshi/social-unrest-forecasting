@@ -1,0 +1,28 @@
+1711 UCDP unit centroids | radius cap 200 km
+streaming 141 months of GDELT daily files (2013-04..2024-12) with 10 workers
+  6/141 months done (through 2013-09)
+  12/141 months done (through 2014-03)
+  18/141 months done (through 2014-09)
+  24/141 months done (through 2015-03)
+  30/141 months done (through 2015-09)
+  36/141 months done (through 2016-03)
+  42/141 months done (through 2016-09)
+  48/141 months done (through 2017-03)
+  54/141 months done (through 2017-09)
+  60/141 months done (through 2018-03)
+  66/141 months done (through 2018-09)
+  72/141 months done (through 2019-03)
+  78/141 months done (through 2019-09)
+  84/141 months done (through 2020-03)
+  90/141 months done (through 2020-09)
+  96/141 months done (through 2021-03)
+  102/141 months done (through 2021-09)
+  108/141 months done (through 2022-03)
+  114/141 months done (through 2022-09)
+  120/141 months done (through 2023-03)
+  126/141 months done (through 2023-09)
+  132/141 months done (through 2024-03)
+  138/141 months done (through 2024-09)
+  141/141 months done (through 2024-12)
+
+wrote 217,795 (unit, month) news-signal rows | 1682 units -> data/interim/gdelt_ucdp_month.parquet

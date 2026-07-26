@@ -1,0 +1,6 @@
+36 state centroids from ACLED event coordinates
+  10/36 states fetched
+  20/36 states fetched
+  30/36 states fetched
+  36/36 states fetched
+wrote 14,256 (week, adm1) climate rows -> data/interim/climate_IN_weekly.parquet
